@@ -1,3 +1,5 @@
+import {UserAuthentication} from './scripts/auth';
+import "./styles/styles.css";
 const loginModal = document.querySelector('.login-btn');
 const modal = document.querySelector('.modal-container');
 const modalClose = document.querySelector('.close');
@@ -17,13 +19,14 @@ function closeModal() {
     modal.style.display = 'none'
 }
 
-const authentication =  new UserAuthentication();
-function  authenticateUser(e) {
+const authentication = new UserAuthentication();
+function authenticateUser(e) {
     e.preventDefault();
-    authentication.login(e.target.email.value,e.target.password.value).then(
+    authentication.login(e.target.email.value, e.target.password.value).then(
         data => {
-            console.log(data);
-            console.log(data.headers.get('auth-token'));
+            if(data.headers.get('auth-token')){
+                sessionStorage.setItem('auth-token',data.headers.get('auth-token'));
+            }
         }
-    );
+    ).catch(err => console.log(err));
 }

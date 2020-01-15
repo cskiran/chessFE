@@ -1,4 +1,4 @@
-class UserAuthentication {
+export class UserAuthentication {
     constructor() {
         this.url = 'http://localhost:3000/api/chess/login'
     }
